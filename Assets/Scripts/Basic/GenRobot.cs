@@ -1,0 +1,60 @@
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
+public class GenRobot : MonoBehaviour
+{
+    public int num;
+    public Transform origin;
+    public GameObject robot;
+    public TextMeshProUGUI robotNumText;
+    public GameObject[] parents;
+    void Start()
+    {
+        for(int index=0; index<13; index++)
+        {
+            num = index;
+            float t = 360.0f / num;
+            for (int i = 0; i < num; i++)
+            {
+                float angle = t * i;
+
+                float posX = origin.position.x - Mathf.Cos(angle * Mathf.Deg2Rad) * 3;
+                float posZ = origin.position.z + Mathf.Sin(angle * Mathf.Deg2Rad) * 3;
+                GameObject temp = Instantiate(robot, new Vector3(posX, -0.38f, posZ), Quaternion.identity);
+                temp.transform.Rotate(0f, angle, 0f);
+                temp.transform.parent = parents[index].transform;
+            }
+            parents[index].SetActive(false);
+        }
+
+        SetRobotNum(6);
+
+
+
+    }
+
+    public void SetRobotNum(float _volume)
+    {
+        if (robotNumText != null)
+            robotNumText.text = _volume.ToString("#0");
+
+        num = (int)_volume;
+        genRobot(num);
+    }
+
+    public void genRobot(int num)
+    {
+        for(int i=0; i<13; i++)
+        {
+            if(i == num)
+                parents[i].SetActive(true);
+            else
+                parents[i].SetActive(false);
+        }
+    }
+}
