@@ -14,9 +14,7 @@ Dual paraboloid mapping (DPM) is an approach for environment mapping that utiliz
 
 ## About The Project
 
-Include a brief description of your project and what it does. You can also include screenshots or GIFs to showcase your project.
 ![demo](https://github.com/HeyMyFriends/DPM_Untiy_VR/blob/main/Demo.png)
-
 
 ### Prerequisites
 
@@ -25,7 +23,8 @@ Unity Version Be sure that the Unity release you have installed on your local ma
 ### Installation
 
 1. Clone or download the repository.
-2. Open up the Unity project and run the main scene in Assets.
+2. Open up the Unity project and run the  `[Main scene]([https://www.example.com](https://github.com/HeyMyFriends/DPM_Untiy_VR/blob/main/Assets/Scenes/MainScene.unity
+))` in Assets.
 
 
 
