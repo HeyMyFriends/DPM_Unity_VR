@@ -23,8 +23,7 @@ Unity Version Be sure that the Unity release you have installed on your local ma
 ### Installation
 
 1. Clone or download the repository.
-2. Open up the Unity project and run the  `[Main scene]([https://www.example.com](https://github.com/HeyMyFriends/DPM_Untiy_VR/blob/main/Assets/Scenes/MainScene.unity
-))` in Assets.
+2. Open up the Unity project and run the [Main scene](https://github.com/HeyMyFriends/DPM_Untiy_VR/blob/main/Assets/Scenes/MainScene.unity) in Assets.
 
 
 
