@@ -58,10 +58,10 @@ This project is designed to run on the VR platform(Oculus Quest 2), and can also
 
 ### Operation
 Right Thumbstick       -        Movement<br>
-Left Thumbstick          -        Rotate<br>
-Right Trigger              -        Increase light size<br>                                                                                                             Left Trigger                 -        Decrease light size<br>
-Right Grip                    -        Turn on/off UI interface<br>
-A                                     -        Increase light strength<br>
-B                                     -        Decrease light strength<br>
-X                                     -        Switch to DPM/CM<br>
+Left Thumbstick        -        Rotate<br>
+Right Trigger          -        Increase light size<br>                                                                                                             Left Trigger           -        Decrease light size<br>
+Right Grip             -        Turn on/off UI interface<br>
+A                      -        Increase light strength<br>
+B                      -        Decrease light strength<br>
+X                      -        Switch to DPM/CM<br>
 
