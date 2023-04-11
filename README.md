@@ -2,15 +2,6 @@
 
 Dual paraboloid mapping (DPM) is an approach for environment mapping that utilizes the reflection of two paraboloid surfaces. Compared to the popular cube mapping approach (CM), DPM offers a major advantage in terms of faster map generation speed. In this project, we implemented the Seamless Mipmap Filtering algorithm for DPM and compared it to CM in a VR platform (Oculus Quest 2) using Unity.
 
-## Table of Contents
-
-  - [DPM_Unity_VR](#DPM_Unity_VR)
-  - [Table of Contents](#table-of-contents)
-  - [About The Project](#about-the-project)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-  - [Usage](#usage)
-
 
 ## About The Project
 
@@ -58,8 +49,8 @@ This project includes several C# and Unity shader scripts. Their roles are shown
 
 
 ### Prerequisites
-本项目在VR platform (Oculus Quest 2)中运行
-Oculus Quest2 development environment configuration
+This project is designed to run on the VR platform(Oculus Quest 2), and can also be viewed directly in the editor. If you wish to experience it in VR, please ensure that your environment is properly configured beforehand.
+[Oculus Quest2 development environment configuration](https://resolute-beet-613.notion.site/Unity-Oculus-Build-and-Run-our-project-44080b869f9c48078132dc4b1bc7b19e) 
 
 ### Installation
 1. Clone or download the repository.
