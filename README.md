@@ -31,7 +31,7 @@ This project includes several C# and Unity shader scripts. Their roles are shown
 1. Scripts:
 
 
-[Assets/Scripts/LightSource.cs](https://github.com/HeyMyFriends/DPM_Untiy_VR/blob/main/Assets/Scripts/LightSource.cs)
+* [Assets/Scripts/LightSource.cs](https://github.com/HeyMyFriends/DPM_Untiy_VR/blob/main/Assets/Scripts/LightSource.cs)
 It is used to set cameras for generating the dual paraboloid shadow map.
 
 
