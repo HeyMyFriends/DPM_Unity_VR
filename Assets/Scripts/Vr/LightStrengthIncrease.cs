@@ -10,6 +10,7 @@ public class LightStrengthIncrease : MonoBehaviour
 
     private void Awake()
     {
+        Shader.SetGlobalFloat("_gLightStrength", 50f);
         toggleReference.action.started += Toggle;
     }
 

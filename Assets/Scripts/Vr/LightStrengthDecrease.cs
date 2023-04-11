@@ -11,7 +11,6 @@ public class LightStrengthDecrease : MonoBehaviour
     private void Awake()
     {
         toggleReference.action.started += Toggle;
-        Shader.SetGlobalFloat("_gLightStrength", 25f);
     }
 
     private void OnDestroy()
