@@ -4,7 +4,7 @@ Dual paraboloid mapping (DPM) is an approach for environment mapping that utiliz
 
 ## Table of Contents
 
-  - [Project Title](#project-title)
+  - [Project Title](#DPM_Unity_VR)
   - [Table of Contents](#table-of-contents)
   - [About The Project](#about-the-project)
   - [Prerequisites](#prerequisites)
