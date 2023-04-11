@@ -17,28 +17,32 @@ Dual paraboloid mapping (DPM) is an approach for environment mapping that utiliz
 ![demo](https://github.com/HeyMyFriends/DPM_Untiy_VR/blob/main/Demo.png)
 This project showcases the use of DPM and CM to create omnidirectional soft shadows on the Oculus Quest 2.
 It can be divided into three main parts:
-1. Shadow map generation
-2. Shadow map sampling
-3. VR interaction implementation
+1. Shadow map generation.
+2. Shadow map sampling.
+3. VR interaction implementation.
 
 For more information on the implementation details, please refer to the [link](https://spiny-globe-90c.notion.site/DPM-Unity-dc2329df3d8943ac9b64de44bd2b3640). 
 
 Additionally, you can access a demo of the webgl version of the project [here](https://heymyfriends.github.io/DPM/).
 
 ### Content
+This project includes several C# and Unity shader scripts. Their roles are shown as follows.
 
 Scripts:
-https://github.com/HeyMyFriends/DPM_Untiy_VR/tree/main/Assets/Scripts/Basic Assets/Scripts/Basic
-
-https://github.com/HeyMyFriends/DPM_Untiy_VR/tree/main/Assets/Scripts/Vr Assets/Scripts/Vr
-
-https://github.com/HeyMyFriends/DPM_Untiy_VR/blob/main/Assets/Scripts/LightSource.cs Assets/Scripts/LightSource.cs
-https://github.com/HeyMyFriends/DPM_Untiy_VR/blob/main/Assets/Scripts/CM/LightSource_CM.cs Assets/Scripts/CM/LightSource_CM.cs
+[Assets/Scripts/LightSource.cs](https://github.com/HeyMyFriends/DPM_Untiy_VR/blob/main/Assets/Scripts/LightSource.cs)
+It is used to set cameras for generating the dual paraboloid shadow map.
+[Assets/Scripts/CM/LightSource_CM.cs](https://github.com/HeyMyFriends/DPM_Untiy_VR/blob/main/Assets/Scripts/CM/LightSource_CM.cs)
+It is used to set cameras for generating the cubemap shadow map.
+[Assets/Scripts/Vr](https://github.com/HeyMyFriends/DPM_Untiy_VR/tree/main/Assets/Scripts/Vr)
+It is used to implement VR interaction.
+[Assets/Scripts/Basic](https://github.com/HeyMyFriends/DPM_Untiy_VR/tree/main/Assets/Scripts/Basic)
+It is used to define the fundamental logic of certain objects, including the movement of robots.
 
 Shaders:
-https://github.com/HeyMyFriends/DPM_Untiy_VR/tree/main/Assets/Shaders/CM Assets/Shaders/CM
-
-https://github.com/HeyMyFriends/DPM_Untiy_VR/tree/main/Assets/Shaders/DPM Assets/Shaders/DPM
+[Assets/Shaders/CM](https://github.com/HeyMyFriends/DPM_Untiy_VR/tree/main/Assets/Shaders/CM)
+It is used for generating the omnidirectional soft shadow with CM.
+[Assets/Shaders/DPM](https://github.com/HeyMyFriends/DPM_Untiy_VR/tree/main/Assets/Shaders/DPM)
+It is used for generating the omnidirectional soft shadow with DPM.
 
 
 ### Prerequisites
