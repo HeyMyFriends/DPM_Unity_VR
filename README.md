@@ -57,21 +57,13 @@ This project is designed to run on the VR platform(Oculus Quest 2), and can also
 2. Open up the Unity project and run the [Assets/Scenes/MainScene](https://github.com/HeyMyFriends/DPM_Untiy_VR/blob/main/Assets/Scenes/MainScene.unity) in Assets.
 
 ### Operation
-* Movement<br>
-   Right Thumbstick
-* Rotate<br>
-   Left Thumbstick
-* Increase light size<br>
-   Right Trigger
-* Decrease light size<br>
-   Left Trigger
-* Turn on/off UI interface<br>
-   Right Grip
-* Increase light strength<br>
-   A
-* Decrease light strength<br>
-   B
-* Switch to DPM/CM<br>
-   X
+- **Right Thumbstick:** Rotate the camera
+- **Left Thumbstick:** Move the character
+- **Right Trigger:** Increase the size of the light source
+- **Left Trigger:** Decrease the size of the light source
+- **Right Grip:** Turn the UI interface on or off
+- **A Button:** Increase the strength of the light source
+- **B Button:** Decrease the strength of the light source
+- **X Button:** Switch between DPM and CM
 
 
