@@ -15,17 +15,34 @@ Dual paraboloid mapping (DPM) is an approach for environment mapping that utiliz
 ## About The Project
 
 ![demo](https://github.com/HeyMyFriends/DPM_Untiy_VR/blob/main/Demo.png)
+This project showcases the use of DPM and CM to create omnidirectional soft shadows on the Oculus Quest 2. The project can be divided into three main parts: shadow map generation, shadow map sampling, and VR interaction implementation. For more information on the implementation details, please refer to the [link](https://spiny-globe-90c.notion.site/DPM-Unity-dc2329df3d8943ac9b64de44bd2b3640). Additionally, a demo of the webgl version of the project can be accessed through [here](https://heymyfriends.github.io/DPM/).
+
+### Content
+
+Scripts:
+https://github.com/HeyMyFriends/DPM_Untiy_VR/tree/main/Assets/Scripts/Basic Assets/Scripts/Basic
+
+https://github.com/HeyMyFriends/DPM_Untiy_VR/tree/main/Assets/Scripts/Vr Assets/Scripts/Vr
+
+https://github.com/HeyMyFriends/DPM_Untiy_VR/blob/main/Assets/Scripts/LightSource.cs Assets/Scripts/LightSource.cs
+https://github.com/HeyMyFriends/DPM_Untiy_VR/blob/main/Assets/Scripts/CM/LightSource_CM.cs Assets/Scripts/CM/LightSource_CM.cs
+
+Shaders:
+https://github.com/HeyMyFriends/DPM_Untiy_VR/tree/main/Assets/Shaders/CM Assets/Shaders/CM
+
+https://github.com/HeyMyFriends/DPM_Untiy_VR/tree/main/Assets/Shaders/DPM Assets/Shaders/DPM
+
 
 ### Prerequisites
-
-Unity Version Be sure that the Unity release you have installed on your local machine is at least the version configured for the project (using a newer version is supported). You can run this project simply by opening the directory as a project on Unity.
+本项目在VR platform (Oculus Quest 2)中运行
+Oculus Quest2 development environment configuration
 
 ### Installation
-
 1. Clone or download the repository.
-2. Open up the Unity project and run the [/Assets/Scenes/MainScene](https://github.com/HeyMyFriends/DPM_Untiy_VR/blob/main/Assets/Scenes/MainScene.unity) in Assets.
+2. Open up the Unity project and run the [Assets/Scenes/MainScene](https://github.com/HeyMyFriends/DPM_Untiy_VR/blob/main/Assets/Scenes/MainScene.unity) in Assets.
 
+### Build
 
-
+### Operation
 
 
