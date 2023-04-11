@@ -1,48 +1,33 @@
-# Project Title
+# DPM_Unity_VR
 
-A brief description of what this project does and who it's for
+Dual paraboloid mapping (DPM) is an approach for environment mapping that utilizes the reflection of two paraboloid surfaces. Compared to the popular cube mapping approach (CM), DPM offers a major advantage in terms of faster map generation speed. In this project, we implemented the Seamless Mipmap Filtering algorithm for DPM and compared it to CM in a VR platform (Oculus Quest 2) using Unity.
 
 ## Table of Contents
 
-- [Project Title](#project-title)
+  - [Project Title](#project-title)
   - [Table of Contents](#table-of-contents)
   - [About The Project](#about-the-project)
-  - [Getting Started](#getting-started)
-    - [Prerequisites](#prerequisites)
-    - [Installation](#installation)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
   - [Usage](#usage)
-  - [Contributing](#contributing)
-  - [License](#license)
-  - [Contact](#contact)
+
 
 ## About The Project
 
-Include a brief description of your project and what it does. You can also include screenshots or GIFs to showcase your project.
+Include a brief description of your project and what it does. You can also include screenshots or GIFs to showcase your project.!
+[WeChat Screenshot_20230411184212](https://user-images.githubusercontent.com/56830282/231137913-945834b5-ed9d-4c78-9d2d-b707259403da.png)
 
-## Getting Started
-
-Include instructions on how to get started with your project. This can include prerequisites, installation instructions, and any other information that someone new to your project might need to know.
 
 ### Prerequisites
 
-List any prerequisites that someone needs to have installed before they can use your project.
+Unity Version Be sure that the Unity release you have installed on your local machine is at least the version configured for the project (using a newer version is supported). You can run this project simply by opening the directory as a project on Unity.
 
 ### Installation
 
-Include step-by-step instructions on how to install your project.
+1. Clone or download the repository.
+2. Open up the Unity project and run the main scene in Assets.
 
-## Usage
 
-Include instructions on how to use your project. This can include code snippets or examples of how to use your project.
 
-## Contributing
 
-Include information on how people can contribute to your project. This can include guidelines for submitting pull requests, code style guidelines, and any other information that people need to know before contributing to your project.
 
-## License
-
-Include information on the license for your project.
-
-## Contact
-
-Include contact information for yourself or your team, in case anyone has questions or wants to get in touch.
