@@ -50,7 +50,7 @@ This project includes several C# and Unity shader scripts. Their roles are shown
 
 ### Prerequisites
 This project is designed to run on the VR platform(Oculus Quest 2), and can also be viewed directly in the editor. If you wish to experience it in VR, please ensure that your environment is properly configured beforehand.<br>
-[Oculus Quest2 development environment configuration](https://resolute-beet-613.notion.site/Unity-Oculus-Build-and-Run-our-project-44080b869f9c48078132dc4b1bc7b19e) 
+[Oculus Quest2 development environment configuration](https://spiny-globe-90c.notion.site/Environment-Configuration-ad5256a8c78f4f50a89be201534c7169) 
 
 ### Installation
 1. Clone or download the repository.
