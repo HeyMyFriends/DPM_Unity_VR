@@ -1526,7 +1526,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Drag",
+                    "name": "LightStrengthIncrease",
                     "type": "Button",
                     "id": "5f271eb9-b795-4ee5-bbb9-dbc7f2df07ed",
                     "expectedControlType": "Button",
@@ -1535,7 +1535,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Rotate",
+                    "name": "LightStrengthDecrease",
                     "type": "Button",
                     "id": "79806407-ca49-4b60-9067-737d773e10d5",
                     "expectedControlType": "Button",
@@ -1594,7 +1594,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Drag",
+                    "action": "LightStrengthIncrease",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -1605,7 +1605,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Rotate",
+                    "action": "LightStrengthDecrease",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

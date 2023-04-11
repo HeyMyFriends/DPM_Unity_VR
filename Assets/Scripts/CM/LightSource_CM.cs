@@ -6,12 +6,12 @@ using UnityEngine.Experimental.Rendering;
 using UnityEngine.Rendering;
 
 [ExecuteInEditMode]
-public class PointLight3 : MonoBehaviour
+public class LightSource_CM : MonoBehaviour
 {
     public bool DebugMode = false;
     public bool control = false;
 
-    [Range(0,4)] public int CubeMapIndex = 0;
+    [Range(0, 4)] public int CubeMapIndex = 0;
 
     public float zFar = 10f;
     public float zNear = 0.01f;
@@ -21,19 +21,15 @@ public class PointLight3 : MonoBehaviour
     public int ShadowMapSize = 1024;
 
     public Color LightColor = Color.white;
+    public float lightstrength;
+
     private bool isOrthographic = false;
     private int FieldOfView = 90;
     private GameObject[] Cameras = new GameObject[5];
-    public Shader[] Shaders = new Shader[5];
     private Camera[] cameras = new Camera[5];
-
-    public float lightstrength;
-
-    private RenderTexture tempRt;
-
-    // private Cubemap[] cubemaps = new Cubemap[5];
-    // private int pShadowSize;
-    //private GameObject Sphere;
+    public Shader[] Shaders = new Shader[5];
+    private RenderTextureDescriptor rtd;
+    private RenderTexture[] tempRts = new RenderTexture[5];
     private Color[] backgroundColors =
     {
         new (1f,1f,1f,1f),
@@ -42,16 +38,15 @@ public class PointLight3 : MonoBehaviour
         new (0f,0f,0f,0f),
         new (0.5f,0.5f,0.5f,0.5f)
     };
-    private RenderTextureDescriptor rtd;
-    private RenderTexture[] tempRts = new RenderTexture[5];
+    private RenderTexture tempRt;
+
     private void CreateCameras()
     {
         for (int i = 0; i < 5; i++)
         {
-            Cameras[i] = new GameObject("Camera"+i);
+            Cameras[i] = new GameObject("Camera" + i);
             Cameras[i].transform.SetParent(transform);
             Cameras[i].AddComponent<Camera>();
-            //Cameras[i].AddComponent<Shader>();
             Camera camera = Cameras[i].GetComponent<Camera>();
             camera.orthographic = isOrthographic;
             camera.nearClipPlane = zNear;
@@ -67,9 +62,9 @@ public class PointLight3 : MonoBehaviour
         bool isMissing = false;
         for (int i = 0; i < 5; i++)
         {
-            if (transform.Find("Camera"+i) != null)
+            if (transform.Find("Camera" + i) != null)
             {
-                Cameras[i] = transform.Find("Camera"+i).gameObject;
+                Cameras[i] = transform.Find("Camera" + i).gameObject;
             }
             else
             {
@@ -82,24 +77,27 @@ public class PointLight3 : MonoBehaviour
         {
             while (true)
             {
-                if(transform.childCount != 0)
+                if (transform.childCount != 0)
                     DestroyImmediate(transform.GetChild(0).gameObject);
-                else 
+                else
                     break;
             }
-            
         }
         return isMissing;
     }
-    
+
+    private void OnDestroy()
+    {
+        for (int i = 0; i < 5; i++) RenderTexture.ReleaseTemporary(tempRts[i]);
+    }
+
     void Start()
     {
-        if(needCreate())CreateCameras();
+        if (needCreate()) CreateCameras();
         for (int i = 0; i < 5; i++)
         {
             cameras[i] = Cameras[i].GetComponent<Camera>();
         }
-
     }
 
     void OnDrawGizmos()
@@ -109,40 +107,27 @@ public class PointLight3 : MonoBehaviour
             Gizmos.color = Color.red;
             Gizmos.DrawSphere(transform.position, zFar);
         }
-        
-    }
-
-    private void OnDestroy()
-    {
-        for(int i = 0; i < 5; i++)RenderTexture.ReleaseTemporary(tempRts[i]);
     }
 
     void Update()
     {
-        
-
-        
         rtd = new RenderTextureDescriptor(ShadowMapSize, ShadowMapSize,
             RenderTextureFormat.ARGB32);
         rtd.useMipMap = true;
         rtd.dimension = TextureDimension.Cube;
 
-        
-
-
-        for(int i = 0; i < 5; i++)
+        for (int i = 0; i < 5; i++)
         {
             RenderTexture.ReleaseTemporary(tempRts[i]);
             tempRts[i] = RenderTexture.GetTemporary(rtd);
             tempRts[i].wrapMode = TextureWrapMode.Clamp;
             tempRts[i].filterMode = FilterMode.Trilinear;
-            //Camera camera = Cameras[i].GetComponent<Camera>();
             cameras[i].nearClipPlane = zNear;
             cameras[i].farClipPlane = zFar;
             cameras[i].backgroundColor = backgroundColors[i];
             cameras[i].RenderToCubemap(tempRts[i], 63);
             cameras[i].SetReplacementShader(Shaders[i], null);
-            Shader.SetGlobalTexture("_CubeMap"+i, tempRts[i]);
+            Shader.SetGlobalTexture("_CubeMap" + i, tempRts[i]);
         }
 
         Shader.SetGlobalFloat("ShadowMapSize", ShadowMapSize);
@@ -155,8 +140,8 @@ public class PointLight3 : MonoBehaviour
             Shader.SetGlobalFloat("_gLightStrength", lightstrength);
         }
         Shader.SetGlobalVector("_l", transform.position);
-        Shader.SetGlobalMatrix("_gWorldToLightCamera", cameras[0].worldToCameraMatrix); //当前片段从世界坐标转换到光源相机空间坐标
-        Shader.SetGlobalMatrix("_gWorldToLightCamera_back", cameras[1].worldToCameraMatrix); //当前片段从世界坐标转换到光源相机空间坐标
+        Shader.SetGlobalMatrix("_gWorldToLightCamera", cameras[0].worldToCameraMatrix);
+        Shader.SetGlobalMatrix("_gWorldToLightCamera_back", cameras[1].worldToCameraMatrix);
 
         Matrix4x4 projectionMatrix = GL.GetGPUProjectionMatrix(cameras[0].projectionMatrix, true);
         Matrix4x4 projectionMatrix_back = GL.GetGPUProjectionMatrix(cameras[1].projectionMatrix, true);

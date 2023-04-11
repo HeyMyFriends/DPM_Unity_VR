@@ -40,7 +40,6 @@ public class LightSource : MonoBehaviour
             Cameras[i] = new GameObject("Camera" + i);
             Cameras[i].transform.SetParent(transform);
             Cameras[i].AddComponent<Camera>();
-            //Cameras[i].AddComponent<Shader>();
             Camera camera = Cameras[i].GetComponent<Camera>();
             camera.orthographic = true;
             camera.nearClipPlane = zNear;
@@ -87,7 +86,6 @@ public class LightSource : MonoBehaviour
         return isMissing;
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         //if (needCreate()) CreateCameras();
@@ -98,7 +96,6 @@ public class LightSource : MonoBehaviour
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         rtd = new RenderTextureDescriptor(ShadowMapSize, ShadowMapSize,
@@ -143,6 +140,6 @@ public class LightSource : MonoBehaviour
         Shader.SetGlobalMatrix("_gProjectionMatrix_back", projectionMatrix_back * cameras[1].worldToCameraMatrix);
 
         //Debug.Log(cameras[0].worldToCameraMatrix);
-        //Depth shader, camera matrix different...
+
     }
 }

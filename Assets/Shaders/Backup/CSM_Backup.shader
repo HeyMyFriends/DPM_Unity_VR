@@ -1,4 +1,4 @@
-Shader "Custom/CSM"
+Shader "Custom/CSM_Backup"
 {
     Properties
     {
@@ -6,7 +6,7 @@ Shader "Custom/CSM"
         _Tex("Texture", 2D) = "white" {}
     }
 
-    SubShader
+        SubShader
     {
         Pass
         {
@@ -16,17 +16,14 @@ Shader "Custom/CSM"
 
             #include "UnityCG.cginc"
 
-            // Constants
             #define PI 3.14159265358979
             #define M 4
             #define fCSMBias 0.068
             #define OFFSET 0.02
             #define SCALEFACTOR 1.11
             #define ALPHA 0.06
-
-            // Variables
             float supress_flag = 0.0;
-            float4 _Color;
+
             uniform float4x4 _gWorldToLightCamera, _gWorldToLightCamera_back;
             uniform sampler2D _gShadowMapTexture0, _gShadowMapTexture1, _gShadowMapTexture2, _gShadowMapTexture3, _gShadowMapTexture4, _gShadowMapTexture5, _gShadowMapTexture6, _gShadowMapTexture7, _gShadowMapTexture8, _gShadowMapTexture9;
             uniform float4 _gShadowMapTexture0_TexelSize;
@@ -40,8 +37,8 @@ Shader "Custom/CSM"
             uniform sampler2D _Tex;
             uniform float4 _Tex_ST;
             uniform float _gLightStrength;
+            float4 _Color;
 
-            // Functions
             float4 getweights(float alpha, float k, float m)
             {
                 float4 weights = float4(exp(-alpha * (k) * (k) / (m * m)),
@@ -107,30 +104,23 @@ Shader "Custom/CSM"
             float4 _f4mipmapDPMAP(sampler2D frontface, sampler2D backface, float3 uv, float fs)
             {
                 float4 cfront, cback, result;
-
-                // convert the filterwidth from cube to dual paraboloid map
                 fs = fscm2dp(fs);
                 fs = .74 * ufunc(uv.z, fs);
-
                 float W0 = ShadowMapSize * sqrt(3);
                 float ml = log(W0 * fs) / log(2.0);
-
                 uv = normalize(uv);
                 uv.z = -uv.z;
                 float2 front_tc = float2(uv.x, uv.y) / (1.0 + uv.z);
                 front_tc = front_tc * 0.5 + 0.5;
                 cfront = tex2Dlod(frontface, float4(front_tc, 0, ml));
-
                 uv.x = -uv.x;
                 float2 back_tc = uv.xy / (1.0 - uv.z);
                 back_tc = back_tc * 0.5 + 0.5;
                 cback = tex2Dlod(backface, float4(back_tc, 0, ml));
-
                 float resolution = 1.0 / fs;
                 float sss = clamp((length(uv.xy) / (1.0 + abs(uv.z)) - 1.0) * resolution + 1.0, 0.0, 1.0) * .5;
                 if (uv.z < 0.0)
                     sss = 1.0 - sss;
-
                 return mix(cback, cfront, wfunc(uv.z, fs));
             }
 
@@ -145,7 +135,6 @@ Shader "Custom/CSM"
                 float sum0, sum1;
 
                 float2 ddd = f4mipmapDPMAP(dpmap[0], dpmap[1], uv, filterwidth).xy;
-
                 float sld_angle = ddd.y;
                 float depthvalue = ddd.x / sld_angle;
 
@@ -154,9 +143,7 @@ Shader "Custom/CSM"
 
                 float k = 1.0;
                 tmp = PI * (2.0 * float4(k, k + 1.0, k + 2.0, k + 3.0) - 1.0);
-
                 float4 weights = getweights(ALPHA, k, float(M));
-
                 sum0 = dot(sin(tmp * (currentDepth - _gShadowBias)) / tmp, cos_val_z * weights);
                 sum1 = dot(cos(tmp * (currentDepth - _gShadowBias)) / tmp, sin_val_z * weights);
 
@@ -169,15 +156,12 @@ Shader "Custom/CSM"
                 float sum0, sum1;
 
                 float sld_angle = f4mipmapDPMAP(dpmap[0], dpmap[1], uv, filterwidth).y;
-
                 sin_val = f4mipmapDPMAP(dpmap[3], dpmap[3 + M], uv, filterwidth) / sld_angle;
                 cos_val = f4mipmapDPMAP(dpmap[2], dpmap[2 + M], uv, filterwidth) / sld_angle;
 
                 float k = 1.0;
                 tmp = PI * (2.0 * float4(k, k + 1.0, k + 2.0, k + 3.0) - 1.0);
-
                 float4 weights = getweights(ALPHA, k, float(M));
-
                 sum0 = dot(cos(tmp * (currentDepth - _gShadowBias)) / tmp, sin_val * weights);
                 sum1 = dot(sin(tmp * (currentDepth - _gShadowBias)) / tmp, cos_val * weights);
 
@@ -207,7 +191,6 @@ Shader "Custom/CSM"
                 return 0.0;
             }
 
-            //dual paraboloid map csm pcf filter
             float csm_pcf_filter(float3 uv, float currentDepth, float filterWidth, sampler2D dpmap[2 * (M + 1)])
             {
                 supress_flag = 1.0;
@@ -217,18 +200,15 @@ Shader "Custom/CSM"
 
             float CSM_SoftShadow(float3 uv, float currentDepth, float distance, float lightsize, sampler2D dpmap[2 * (M + 1)], float zNear, float zFar, float shadow_a, float shadow_b)
             {
-                float blockerdepth = FindBlockDepth(uv, currentDepth, distance, lightsize, dpmap, zNear, zFar); //return dp map look up result
+                float blockerdepth = FindBlockDepth(uv, currentDepth, distance, lightsize, dpmap, zNear, zFar);
 
                 if (distance == 0.0 || blockerdepth >= distance || blockerdepth == 0.0)
                     return 1.0;
 
                 float FilterWidth = estimatefwo(lightsize, distance, blockerdepth);
-
                 float shadow = csm_pcf_filter(uv, currentDepth, FilterWidth, dpmap);
-
                 float temp = shadow_b * (blockerdepth - distance);
                 float power = 1.0 + shadow_a * exp(temp);
-
                 shadow = pow(shadow, power);
 
                 return shadow;

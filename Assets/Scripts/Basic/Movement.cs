@@ -16,12 +16,19 @@ public class Movement : MonoBehaviour
 
     void Update()
     {
-        //transform.RotateAround(targetTrans.position, Vector3.up, turnRate * Time.deltaTime);
-        //transform.rotation = angle;
-        transform.position += transform.forward * Time.deltaTime * speed; 
-        anim.SetFloat("Speed", 1.0f);
-        transform.Rotate(0f, turnRate * Time.deltaTime, 0f);
+        // Rotate the object around the target
+        // transform.RotateAround(targetTrans.position, Vector3.up, turnRate * Time.deltaTime);
 
-        
+        // Reset the rotation to the original angle
+        // transform.rotation = angle;
+
+        // Move the object forward
+        transform.position += transform.forward * Time.deltaTime * speed;
+
+        // Set the animation speed
+        anim.SetFloat("Speed", 1.0f);
+
+        // Rotate the object around its own axis
+        transform.Rotate(0f, turnRate * Time.deltaTime, 0f);
     }
 }

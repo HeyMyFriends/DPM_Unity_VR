@@ -43,9 +43,9 @@ public class DisplayFPS : MonoBehaviour
     {
         while (true)
         {
-
-
-            textOutput.text = "FPS: " + framesPerSecond + "\n" + "MS: " + milliseconds.ToString(".0") + "\n" + "LightSize: " + lightSize.ToString("0.000");
+            textOutput.text = "FPS: " + framesPerSecond + "\n"
+                            + "MS: " + milliseconds.ToString(".0") + "\n"
+                            + "LightSize: " + lightSize.ToString("0.000");
             yield return new WaitForSeconds(updateInteval);
         }
     }

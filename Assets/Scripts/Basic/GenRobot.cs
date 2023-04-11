@@ -13,16 +13,16 @@ public class GenRobot : MonoBehaviour
     public GameObject robot;
     public TextMeshProUGUI robotNumText;
     public GameObject[] parents;
+
     void Start()
     {
-        for(int index=0; index<13; index++)
+        for (int index = 0; index < 13; index++)
         {
             num = index;
             float t = 360.0f / num;
             for (int i = 0; i < num; i++)
             {
                 float angle = t * i;
-
                 float posX = origin.position.x - Mathf.Cos(angle * Mathf.Deg2Rad) * 3;
                 float posZ = origin.position.z + Mathf.Sin(angle * Mathf.Deg2Rad) * 3;
                 GameObject temp = Instantiate(robot, new Vector3(posX, -0.38f, posZ), Quaternion.identity);
@@ -31,11 +31,7 @@ public class GenRobot : MonoBehaviour
             }
             parents[index].SetActive(false);
         }
-
         SetRobotNum(6);
-
-
-
     }
 
     public void SetRobotNum(float _volume)
@@ -49,9 +45,9 @@ public class GenRobot : MonoBehaviour
 
     public void genRobot(int num)
     {
-        for(int i=0; i<13; i++)
+        for (int i = 0; i < 13; i++)
         {
-            if(i == num)
+            if (i == num)
                 parents[i].SetActive(true);
             else
                 parents[i].SetActive(false);

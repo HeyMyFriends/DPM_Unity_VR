@@ -1175,19 +1175,19 @@ MonoBehaviour:
   control: 0
   CubeMapIndex: 0
   zFar: 32
-  zNear: 0.03
-  lightsize: 0.7
+  zNear: 0.01
+  lightsize: 0.5
   Bias: 0.07
   CutOff: 0
   ShadowMapSize: 1024
   LightColor: {r: 1, g: 1, b: 1, a: 1}
+  lightstrength: 0
   Shaders:
   - {fileID: 4800000, guid: 1b34f8e2ead22984eab15ad582d74097, type: 3}
   - {fileID: 4800000, guid: c4c4460dda270bd4eb69539e825b5e9c, type: 3}
   - {fileID: 4800000, guid: 99260445ad6e8e94c9d9b90a4f004f8e, type: 3}
   - {fileID: 4800000, guid: d5928e80dcbbcf14ba79b11a3eea50c4, type: 3}
   - {fileID: 4800000, guid: a42e5709e9f385b45abb2db19adc2205, type: 3}
-  lightstrength: 0
 --- !u!1 &277152311
 GameObject:
   m_ObjectHideFlags: 0
@@ -1659,7 +1659,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0
+  near clip plane: 0.01
   far clip plane: 32
   field of view: 60
   orthographic: 1
@@ -2141,7 +2141,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0
+  near clip plane: 0.01
   far clip plane: 32
   field of view: 60
   orthographic: 1
@@ -3387,7 +3387,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0
+  near clip plane: 0.01
   far clip plane: 32
   field of view: 60
   orthographic: 1
@@ -3520,10 +3520,10 @@ GameObject:
   - component: {fileID: 598309726}
   - component: {fileID: 598309725}
   - component: {fileID: 598309727}
-  - component: {fileID: 598309728}
   - component: {fileID: 598309729}
   - component: {fileID: 598309730}
   - component: {fileID: 598309731}
+  - component: {fileID: 598309732}
   m_Layer: 0
   m_Name: LightSource
   m_TagString: Untagged
@@ -3543,9 +3543,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 826d70ac2a8976943af78efa3dee7530, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debug: 2
+  debug: 0
   zFar: 32
-  zNear: 0
+  zNear: 0.01
   lightsize: 0
   Bias: 0.06
   CutOff: 0
@@ -3667,24 +3667,6 @@ MonoBehaviour:
   lightSizeReference2: {fileID: -4010501972277868889, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   displayFPS: {fileID: 1302290488}
   light: {fileID: 598309722}
---- !u!114 &598309728
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 598309720}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 751d49bc3ce02bd41bda70b38ed07dbc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  toggleReference: {fileID: -6272945805087426830, guid: c348712bda248c246b8c49b3db54643f, type: 3}
-  origin: {fileID: 2100000, guid: 58bcf5e1371d1334184121000cab1a0c, type: 2}
-  change: {fileID: 2100000, guid: 4c8cdb2a869363c46b50ed928c586fb5, type: 2}
-  control: 0
-  vrTransform: {fileID: 1465858581}
-  temp: 10
 --- !u!114 &598309729
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3698,10 +3680,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toggleReference: {fileID: 7682283258214777836, guid: c348712bda248c246b8c49b3db54643f, type: 3}
-  origin: {fileID: 2100000, guid: 58bcf5e1371d1334184121000cab1a0c, type: 2}
-  change: {fileID: 2100000, guid: 4c8cdb2a869363c46b50ed928c586fb5, type: 2}
-  control: 0
-  dragLight: {fileID: 598309728}
 --- !u!114 &598309730
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3741,6 +3719,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &598309732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 598309720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11c9224c5b5c71e4ca5676e929ff6041, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toggleReference: {fileID: -6272945805087426830, guid: c348712bda248c246b8c49b3db54643f, type: 3}
 --- !u!1 &605194443
 GameObject:
   m_ObjectHideFlags: 0
@@ -3828,7 +3819,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0
+  near clip plane: 0.01
   far clip plane: 32
   field of view: 60
   orthographic: 1
@@ -3971,7 +3962,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0
+  near clip plane: 0.01
   far clip plane: 32
   field of view: 60
   orthographic: 1
@@ -4350,7 +4341,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0
+  near clip plane: 0.01
   far clip plane: 32
   field of view: 60
   orthographic: 1
@@ -4953,7 +4944,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0
+  near clip plane: 0.01
   far clip plane: 32
   field of view: 164.7
   orthographic: 1
@@ -7732,7 +7723,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0
+  near clip plane: 0.01
   far clip plane: 32
   field of view: 60
   orthographic: 1
@@ -9173,7 +9164,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0
+  near clip plane: 0.01
   far clip plane: 32
   field of view: 60
   orthographic: 1
@@ -11301,7 +11292,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0
+  near clip plane: 0.01
   far clip plane: 32
   field of view: 60
   orthographic: 1
@@ -15116,14 +15107,25 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Hi!
 
-    Rotate - Left hand
+    Right Thumbstick       -        Movement
 
-    Move - Right hand
+    Left Thumbstick         
+    -        Rotate
 
-    FPS Show - Right
-    grip Button
+    Right Trigger              -        Increase light size                                                                                                                    
+    Left Trigger                 -        Decrease light size
 
-    Light size - Trigger button'
+    Right Grip                   
+    -        Turn on/off UI interface
+
+    A                                    
+    -        Increase light strength
+
+    B                                     -       
+    Decrease light strength
+
+    X                                     -        Switch
+    to DPM/CM'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
@@ -15186,7 +15188,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: -285.6657, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -15235,8 +15237,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -30.844, y: 3.095}
-  m_SizeDelta: {x: 263.032, y: 134.471}
+  m_AnchoredPosition: {x: -53.1, y: 15.200001}
+  m_SizeDelta: {x: 263.032, y: 205.325}
   m_Pivot: {x: 1, y: 0}
 --- !u!1 &528344367229642928
 GameObject:
@@ -17200,8 +17202,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 40}
+  m_AnchoredPosition: {x: 11.95, y: -14.902}
+  m_SizeDelta: {x: 123.899, y: 69.804}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &528344368924901673
 MonoBehaviour:

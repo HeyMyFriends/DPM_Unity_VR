@@ -13,10 +13,10 @@ public class PointLight2 : MonoBehaviour
     [Range(-4f, 4f)] public float K = 1.0f;
     [Range(-50f, 50f)] public float M = 4.0f;
     [Range(-0.1f, 0.1f)] public float OFFSET = 0.02f;
-    [Range(0, 4f)] public float SCALEFACTOR = 1.11f; 
+    [Range(0, 4f)] public float SCALEFACTOR = 1.11f;
     [Range(-50f, 50f)] public float SHADOW_A = 20f;
     [Range(-50f, 2000f)] public float SHADOW_B = 25f;
-    [Range(0,4)] public int CubeMapIndex = 0;
+    [Range(0, 4)] public int CubeMapIndex = 0;
     public bool CutCorner = true;
     public bool Diffuse = true;
     public bool Atten = true;
@@ -24,20 +24,16 @@ public class PointLight2 : MonoBehaviour
     [SerializeField] public float NearPlane = 0.3f;
     [SerializeField] public float FarPlane = 20;
     [SerializeField] public int ShadowMapSize = 128;
-    [Range(0.01f,2f)] public float LightSize = 0.005f;
-    [Range(0,0.2f)] public float bias = 0.005f;
-    [Range(0,5.0f)] public float Brightness = 1f;
+    [Range(0.01f, 2f)] public float LightSize = 0.005f;
+    [Range(0, 0.2f)] public float bias = 0.005f;
+    [Range(0, 5.0f)] public float Brightness = 1f;
     public Color LightColor = Color.white;
     private bool isOrthographic = false;
     private int FieldOfView = 60;
     private GameObject[] Cameras = new GameObject[5];
     public Shader[] Shaders = new Shader[5];
     private Camera[] cameras = new Camera[5];
-    
     private RenderTexture tempRt;
-    // private Cubemap[] cubemaps = new Cubemap[5];
-    // private int pShadowSize;
-    //private GameObject Sphere;
     private Color[] backgroundColors =
     {
         new (1f,1f,1f,1f),
@@ -48,14 +44,14 @@ public class PointLight2 : MonoBehaviour
     };
     private RenderTextureDescriptor rtd;
     private RenderTexture[] tempRts = new RenderTexture[5];
+
     private void CreateCameras()
     {
         for (int i = 0; i < 5; i++)
         {
-            Cameras[i] = new GameObject("Camera"+i);
+            Cameras[i] = new GameObject("Camera" + i);
             Cameras[i].transform.SetParent(transform);
             Cameras[i].AddComponent<Camera>();
-            //Cameras[i].AddComponent<Shader>();
             Camera camera = Cameras[i].GetComponent<Camera>();
             camera.orthographic = isOrthographic;
             camera.nearClipPlane = NearPlane;
@@ -71,9 +67,9 @@ public class PointLight2 : MonoBehaviour
         bool isMissing = false;
         for (int i = 0; i < 5; i++)
         {
-            if (transform.Find("Camera"+i) != null)
+            if (transform.Find("Camera" + i) != null)
             {
-                Cameras[i] = transform.Find("Camera"+i).gameObject;
+                Cameras[i] = transform.Find("Camera" + i).gameObject;
             }
             else
             {
@@ -86,42 +82,22 @@ public class PointLight2 : MonoBehaviour
         {
             while (true)
             {
-                if(transform.childCount != 0)
+                if (transform.childCount != 0)
                     DestroyImmediate(transform.GetChild(0).gameObject);
-                else 
+                else
                     break;
             }
-            
         }
         return isMissing;
     }
-    
-    // Start is called before the first frame update
+
     void Start()
     {
-        if(needCreate())CreateCameras();
-        //Sphere = transform.Find("Sphere").gameObject;
+        if (needCreate()) CreateCameras();
         for (int i = 0; i < 5; i++)
         {
             cameras[i] = Cameras[i].GetComponent<Camera>();
         }
-        // rtd = new RenderTextureDescriptor(ShadowMapSize, ShadowMapSize,
-        //     RenderTextureFormat.ARGB32);
-        // rtd.useMipMap = true;
-        // rtd.dimension = TextureDimension.Cube;
-        // for (int i = 0; i < 5; i++)
-        // {
-        //     tempRts[i] = RenderTexture.GetTemporary(rtd);
-        //     tempRts[i].wrapMode = TextureWrapMode.Clamp;
-        //     tempRts[i].filterMode = FilterMode.Trilinear;
-        // }
-        //pShadowSize = ShadowMapSize;
-        // for (int i = 0; i < 5; i++)
-        // {
-        //     cubemaps[i] = new Cubemap(ShadowMapSize, TextureFormat.ARGB32, true);
-        //     cubemaps[i].wrapMode = TextureWrapMode.Clamp;
-        //     
-        // }
     }
 
     void OnDrawGizmos()
@@ -131,46 +107,35 @@ public class PointLight2 : MonoBehaviour
             Gizmos.color = Color.red;
             Gizmos.DrawSphere(transform.position, FarPlane);
         }
-        
     }
 
     private void OnDestroy()
     {
-        for(int i = 0; i < 5; i++)RenderTexture.ReleaseTemporary(tempRts[i]);
+        for (int i = 0; i < 5; i++) RenderTexture.ReleaseTemporary(tempRts[i]);
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
-       /* float sphereSize = 1f + 1.5f * LightSize;
-        Sphere.transform.localScale = new Vector3(sphereSize,sphereSize,sphereSize);*/
-        
         rtd = new RenderTextureDescriptor(ShadowMapSize, ShadowMapSize,
             RenderTextureFormat.ARGB32);
         rtd.useMipMap = true;
         rtd.dimension = TextureDimension.Cube;
 
-        
-
-
-        for(int i = 0; i < 5; i++)
+        for (int i = 0; i < 5; i++)
         {
             RenderTexture.ReleaseTemporary(tempRts[i]);
             tempRts[i] = RenderTexture.GetTemporary(rtd);
             tempRts[i].wrapMode = TextureWrapMode.Clamp;
             tempRts[i].filterMode = FilterMode.Trilinear;
-            //Camera camera = Cameras[i].GetComponent<Camera>();
             cameras[i].nearClipPlane = NearPlane;
             cameras[i].farClipPlane = FarPlane;
             cameras[i].backgroundColor = backgroundColors[i];
             cameras[i].RenderToCubemap(tempRts[i], 63);
             cameras[i].SetReplacementShader(Shaders[i], null);
-            Shader.SetGlobalTexture("_CubeMap"+i, tempRts[i]);
+            Shader.SetGlobalTexture("_CubeMap" + i, tempRts[i]);
         }
 
         Shader.SetGlobalInt("_CubeCutCorner", CutCorner ? 1 : 0);
-       
         Shader.SetGlobalMatrix("_CubeShadowV", transform.worldToLocalMatrix);
         Shader.SetGlobalVector("_l", transform.position);
         Shader.SetGlobalFloat("_CubeBias", bias);
@@ -183,9 +148,7 @@ public class PointLight2 : MonoBehaviour
         Shader.SetGlobalInt("_CubeAtten", Atten ? 1 : 0);
         Shader.SetGlobalInt("_CubeShadow", Shadow ? 1 : 0);
         Shader.SetGlobalColor("_CubeLightColor", LightColor);
-
         Shader.SetGlobalInt("_CubeMapIndex", CubeMapIndex);
-        
         Shader.SetGlobalFloat("ALPHA", ALPHA);
         Shader.SetGlobalFloat("M", M);
         Shader.SetGlobalFloat("K", K);
@@ -193,7 +156,6 @@ public class PointLight2 : MonoBehaviour
         Shader.SetGlobalFloat("SCALEFACTOR", SCALEFACTOR);
         Shader.SetGlobalFloat("SHADOW_A", SHADOW_A);
         Shader.SetGlobalFloat("SHADOW_B", SHADOW_B);
-
         Shader.SetGlobalMatrix("_gWorldToLightCamera", cameras[0].worldToCameraMatrix);
     }
 }

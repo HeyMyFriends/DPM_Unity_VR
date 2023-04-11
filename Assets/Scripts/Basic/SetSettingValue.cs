@@ -9,17 +9,6 @@ using UnityEngine.UI;
 public class SetSettingValue : MonoBehaviour
 {
     public TextMeshProUGUI LightSizeText, BiasText;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void SetLightSizeText(float _volume)
     {

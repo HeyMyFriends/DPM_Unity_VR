@@ -22,31 +22,25 @@ public class LightSizeChange : MonoBehaviour
 
     private void UpdateLightSize(float value)
     {
-        
-        {
-            temp -= 0.01f * value;
-            if (temp <= 0.00f)
-                temp = 0.00f;
-            displayFPS.lightSize = temp;
-            Shader.SetGlobalFloat("lightsize", temp);
-            light.localScale = new Vector3(1.0f + temp, 1.0f + temp, 1.0f + temp);
+        temp -= 0.01f * value;
+        if (temp <= 0.00f)
+            temp = 0.00f;
 
-        }
-
+        displayFPS.lightSize = temp;
+        Shader.SetGlobalFloat("lightsize", temp);
+        light.localScale = new Vector3(1.0f + temp, 1.0f + temp, 1.0f + temp);
     }
 
     private void UpdateLightSize2(float value)
     {
         
-        {
-            temp += 0.01f * value;
-            if (temp >= 1.5f)
-                temp = 1.5f;
+        temp += 0.01f * value;
+        if (temp >= 1.5f)
+            temp = 1.5f;
 
-            displayFPS.lightSize = temp;
-            Shader.SetGlobalFloat("lightsize", temp);
-            light.localScale = new Vector3(1.0f + temp, 1.0f + temp, 1.0f + temp);
-        }
+        displayFPS.lightSize = temp;
+        Shader.SetGlobalFloat("lightsize", temp);
+        light.localScale = new Vector3(1.0f + temp, 1.0f + temp, 1.0f + temp);
 
     }
 }
