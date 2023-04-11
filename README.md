@@ -49,15 +49,19 @@ This project includes several C# and Unity shader scripts. Their roles are shown
 
 
 ### Prerequisites
-This project is designed to run on the VR platform(Oculus Quest 2), and can also be viewed directly in the editor. If you wish to experience it in VR, please ensure that your environment is properly configured beforehand.
+This project is designed to run on the VR platform(Oculus Quest 2), and can also be viewed directly in the editor. If you wish to experience it in VR, please ensure that your environment is properly configured beforehand.<br>
 [Oculus Quest2 development environment configuration](https://resolute-beet-613.notion.site/Unity-Oculus-Build-and-Run-our-project-44080b869f9c48078132dc4b1bc7b19e) 
 
 ### Installation
 1. Clone or download the repository.
 2. Open up the Unity project and run the [Assets/Scenes/MainScene](https://github.com/HeyMyFriends/DPM_Untiy_VR/blob/main/Assets/Scenes/MainScene.unity) in Assets.
 
-### Build
-
 ### Operation
-
+Right Thumbstick       -        Movement<br>
+Left Thumbstick          -        Rotate<br>
+Right Trigger              -        Increase light size<br>                                                                                                             Left Trigger                 -        Decrease light size<br>
+Right Grip                    -        Turn on/off UI interface<br>
+A                                     -        Increase light strength<br>
+B                                     -        Decrease light strength<br>
+X                                     -        Switch to DPM/CM<br>
 
