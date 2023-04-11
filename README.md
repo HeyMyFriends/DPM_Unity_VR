@@ -4,7 +4,7 @@ Dual paraboloid mapping (DPM) is an approach for environment mapping that utiliz
 
 ## Table of Contents
 
-  - [Project Title](#DPM_Unity_VR)
+  - [DPM_Unity_VR](#DPM_Unity_VR)
   - [Table of Contents](#table-of-contents)
   - [About The Project](#about-the-project)
   - [Prerequisites](#prerequisites)
@@ -15,7 +15,15 @@ Dual paraboloid mapping (DPM) is an approach for environment mapping that utiliz
 ## About The Project
 
 ![demo](https://github.com/HeyMyFriends/DPM_Untiy_VR/blob/main/Demo.png)
-This project showcases the use of DPM and CM to create omnidirectional soft shadows on the Oculus Quest 2. The project can be divided into three main parts: shadow map generation, shadow map sampling, and VR interaction implementation. For more information on the implementation details, please refer to the [link](https://spiny-globe-90c.notion.site/DPM-Unity-dc2329df3d8943ac9b64de44bd2b3640). Additionally, a demo of the webgl version of the project can be accessed through [here](https://heymyfriends.github.io/DPM/).
+This project showcases the use of DPM and CM to create omnidirectional soft shadows on the Oculus Quest 2.
+It can be divided into three main parts:
+1. Shadow map generation
+2. Shadow map sampling
+3. VR interaction implementation
+
+For more information on the implementation details, please refer to the [link](https://spiny-globe-90c.notion.site/DPM-Unity-dc2329df3d8943ac9b64de44bd2b3640). 
+
+Additionally, you can access a demo of the webgl version of the project [here](https://heymyfriends.github.io/DPM/).
 
 ### Content
 
