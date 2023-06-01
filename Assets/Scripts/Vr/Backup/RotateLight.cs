@@ -1,3 +1,8 @@
+/*
+This script is used to implement VR interaction(rotate the light using the controller button).
+*/
+
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

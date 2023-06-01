@@ -1,3 +1,7 @@
+/*
+This script is used to control the camera on a PC.
+*/
+
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
 #endif

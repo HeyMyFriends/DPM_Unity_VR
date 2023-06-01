@@ -1,3 +1,7 @@
+/*
+This script is used to generate the robots and assign their movements.
+*/
+
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -20,6 +24,7 @@ public class GenRobot : MonoBehaviour
         {
             num = index;
             float t = 360.0f / num;
+            //Calculate the initial position and rotational movement angle for the robots according to their quantity
             for (int i = 0; i < num; i++)
             {
                 float angle = t * i;
@@ -34,6 +39,7 @@ public class GenRobot : MonoBehaviour
         SetRobotNum(6);
     }
 
+    //Set the quantity of robots
     public void SetRobotNum(float _volume)
     {
         if (robotNumText != null)

@@ -1,3 +1,8 @@
+/*
+This script is used to set cameras for generating the dual paraboloid shadow map.
+*/
+
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,9 +21,10 @@ public class LightSource : MonoBehaviour
     private Camera[] cameras = new Camera[10];
     private RenderTextureDescriptor rtd;
     public RenderTexture[] tempRts = new RenderTexture[10];
-
+    //Used to decide whether to debug from the editor
     public bool control = false;
 
+    //Define the background colors of shadow maps
     private Color[] backgroundColors =
     {
         new(1f, 1f, 1f, 1f),
@@ -33,6 +39,7 @@ public class LightSource : MonoBehaviour
         new(0.5f, 0.5f, 0.5f, 0.5f)
     };
 
+    //Create cameras and set their properties(nearPlane, farPlane, FOV, etc.)
     private void CreateCameras()
     {
         for (int i = 0; i < 10; i++)
@@ -55,40 +62,8 @@ public class LightSource : MonoBehaviour
         }
     }
 
-    private bool needCreate()
-    {
-        bool isMissing = false;
-        for (int i = 0; i < 10; i++)
-        {
-            if (transform.Find("Camera" + i) != null)
-            {
-                Cameras[i] = transform.Find("Camera" + i).gameObject;
-            }
-            else
-            {
-                isMissing = true;
-                break;
-            }
-        }
-
-        if (isMissing)
-        {
-            while (true)
-            {
-                if (transform.childCount != 0)
-                    DestroyImmediate(transform.GetChild(0).gameObject);
-                else
-                    break;
-            }
-
-        }
-
-        return isMissing;
-    }
-
     void Start()
     {
-        //if (needCreate()) CreateCameras();
         for (int i = 0; i < 10; i++)
         {
             cameras[i] = Cameras[i].GetComponent<Camera>();
@@ -106,12 +81,16 @@ public class LightSource : MonoBehaviour
         {
             //RenderTexture.ReleaseTemporary(tempRts[i]);
             //tempRts[i] = RenderTexture.GetTemporary(rtd);
+
+            //Set cameras’ properties in the Update function
             tempRts[i].wrapMode = TextureWrapMode.Clamp;
             tempRts[i].filterMode = FilterMode.Trilinear;
             cameras[i].nearClipPlane = zNear;
             cameras[i].farClipPlane = zFar;
             cameras[i].backgroundColor = backgroundColors[i];
             cameras[i].Render();
+
+            //Set cameras’ render target and shader
             cameras[i].targetTexture = tempRts[i];
             cameras[i].SetReplacementShader(Shaders[i], null);
             Shader.SetGlobalTexture("_gShadowMapTexture" + i, tempRts[i]);
@@ -121,7 +100,7 @@ public class LightSource : MonoBehaviour
             camera.renderingPath = RenderingPath.Forward;
 
         }
-
+        //Set the shaders' uniform variables
         Shader.SetGlobalInt("Debug", debug);
         Shader.SetGlobalFloat("ShadowMapSize", ShadowMapSize);
         Shader.SetGlobalFloat("_gShadowBias", Bias);
@@ -131,15 +110,17 @@ public class LightSource : MonoBehaviour
             Shader.SetGlobalFloat("lightsize", lightsize);
         Shader.SetGlobalVector("_l", transform.position);
         Shader.SetGlobalMatrix("_gWorldToLightCamera", cameras[0].worldToCameraMatrix); 
-        Shader.SetGlobalMatrix("_gWorldToLightCamera_back", cameras[1].worldToCameraMatrix); 
+        Shader.SetGlobalMatrix("_gWorldToLightCamera_back", cameras[1].worldToCameraMatrix);
 
+        //Get the camera's projection matrixs
         Matrix4x4 projectionMatrix = GL.GetGPUProjectionMatrix(cameras[0].projectionMatrix, true);
         Matrix4x4 projectionMatrix_back = GL.GetGPUProjectionMatrix(cameras[1].projectionMatrix, true);
 
+        //Set the shaders' projection matrixs
         Shader.SetGlobalMatrix("_gProjectionMatrix", projectionMatrix * cameras[0].worldToCameraMatrix); 
         Shader.SetGlobalMatrix("_gProjectionMatrix_back", projectionMatrix_back * cameras[1].worldToCameraMatrix);
 
-        //Debug.Log(cameras[0].worldToCameraMatrix);
+        
 
     }
 }

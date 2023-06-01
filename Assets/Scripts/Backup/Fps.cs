@@ -1,3 +1,7 @@
+/*
+This script is used to display the FPS on a PC.
+*/
+
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;

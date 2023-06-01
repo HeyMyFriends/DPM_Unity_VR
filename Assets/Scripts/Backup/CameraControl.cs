@@ -1,4 +1,9 @@
-﻿using System.Collections;
+﻿/*
+This script is used to control the camera on a PC.
+*/
+
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

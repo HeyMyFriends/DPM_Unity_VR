@@ -1,4 +1,9 @@
-﻿using System.Collections;
+﻿/*
+This script is used to display the FPS and parameter values on the UI.
+*/
+
+
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -32,6 +37,7 @@ public class DisplayFPS : MonoBehaviour
         CalculateCurrentFPS();
     }
 
+    //Calculate FPS
     private void CalculateCurrentFPS()
     {
         deltaTime += (Time.unscaledDeltaTime - deltaTime) * 0.1f;

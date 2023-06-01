@@ -1,3 +1,7 @@
+/*
+This script is used to control all animation clips for the robot.
+*/
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

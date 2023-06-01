@@ -1,3 +1,7 @@
+/*
+This script is used to set the parameter values.
+*/
+
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;

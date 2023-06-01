@@ -1,3 +1,7 @@
+/*
+This script is used to implement VR interaction(set light position using the controller button).
+*/
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

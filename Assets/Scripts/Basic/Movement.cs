@@ -1,3 +1,8 @@
+/*
+This script is used to achieve simple rotation around a point.
+*/
+
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

@@ -1,4 +1,9 @@
-﻿using System;
+﻿/*
+This script is used to set cameras for generating the cubemap shadow map.
+*/
+
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +13,7 @@ using UnityEngine.Rendering;
 [ExecuteInEditMode]
 public class LightSource_CM : MonoBehaviour
 {
-    public bool DebugMode = false;
+    //Used to decide whether to debug from the editor
     public bool control = false;
 
     [Range(0, 4)] public int CubeMapIndex = 0;
@@ -30,6 +35,9 @@ public class LightSource_CM : MonoBehaviour
     public Shader[] Shaders = new Shader[5];
     private RenderTextureDescriptor rtd;
     private RenderTexture[] tempRts = new RenderTexture[5];
+    private RenderTexture tempRt;
+
+    //Define the background colors of shadow maps
     private Color[] backgroundColors =
     {
         new (1f,1f,1f,1f),
@@ -38,8 +46,8 @@ public class LightSource_CM : MonoBehaviour
         new (0f,0f,0f,0f),
         new (0.5f,0.5f,0.5f,0.5f)
     };
-    private RenderTexture tempRt;
-
+    
+    //Create cameras and set their properties(nearPlane, farPlane, FOV, etc.)
     private void CreateCameras()
     {
         for (int i = 0; i < 5; i++)
@@ -56,7 +64,7 @@ public class LightSource_CM : MonoBehaviour
             camera.aspect = 1.0f;
         }
     }
-
+    //Create temporary cameras
     private bool needCreate()
     {
         bool isMissing = false;
@@ -86,6 +94,7 @@ public class LightSource_CM : MonoBehaviour
         return isMissing;
     }
 
+    //Release the temporary RenderTexture memory
     private void OnDestroy()
     {
         for (int i = 0; i < 5; i++) RenderTexture.ReleaseTemporary(tempRts[i]);
@@ -93,19 +102,11 @@ public class LightSource_CM : MonoBehaviour
 
     void Start()
     {
+        //Create temporary cameras if there are no cameras available
         if (needCreate()) CreateCameras();
         for (int i = 0; i < 5; i++)
         {
             cameras[i] = Cameras[i].GetComponent<Camera>();
-        }
-    }
-
-    void OnDrawGizmos()
-    {
-        if (DebugMode)
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawSphere(transform.position, zFar);
         }
     }
 
@@ -118,18 +119,21 @@ public class LightSource_CM : MonoBehaviour
 
         for (int i = 0; i < 5; i++)
         {
+            //Release the current temporary RenderTexture and obtain a new one
             RenderTexture.ReleaseTemporary(tempRts[i]);
             tempRts[i] = RenderTexture.GetTemporary(rtd);
+            //Set cameras’ properties in the Update function
             tempRts[i].wrapMode = TextureWrapMode.Clamp;
             tempRts[i].filterMode = FilterMode.Trilinear;
             cameras[i].nearClipPlane = zNear;
             cameras[i].farClipPlane = zFar;
             cameras[i].backgroundColor = backgroundColors[i];
+            //Set cameras’ render target and shader
             cameras[i].RenderToCubemap(tempRts[i], 63);
             cameras[i].SetReplacementShader(Shaders[i], null);
             Shader.SetGlobalTexture("_CubeMap" + i, tempRts[i]);
         }
-
+        //Set the shaders' uniform variables
         Shader.SetGlobalFloat("ShadowMapSize", ShadowMapSize);
         Shader.SetGlobalFloat("_gShadowBias", Bias);
         Shader.SetGlobalFloat("_clipValue", CutOff);
@@ -142,10 +146,10 @@ public class LightSource_CM : MonoBehaviour
         Shader.SetGlobalVector("_l", transform.position);
         Shader.SetGlobalMatrix("_gWorldToLightCamera", cameras[0].worldToCameraMatrix);
         Shader.SetGlobalMatrix("_gWorldToLightCamera_back", cameras[1].worldToCameraMatrix);
-
+        //Get the camera's projection matrixs
         Matrix4x4 projectionMatrix = GL.GetGPUProjectionMatrix(cameras[0].projectionMatrix, true);
         Matrix4x4 projectionMatrix_back = GL.GetGPUProjectionMatrix(cameras[1].projectionMatrix, true);
-
+        //Set the shaders' projection matrixs
         Shader.SetGlobalMatrix("_gProjectionMatrix", projectionMatrix * cameras[0].worldToCameraMatrix);
         Shader.SetGlobalMatrix("_gProjectionMatrix_back", projectionMatrix_back * cameras[1].worldToCameraMatrix);
     }

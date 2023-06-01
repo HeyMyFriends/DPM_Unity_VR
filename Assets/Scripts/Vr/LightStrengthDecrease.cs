@@ -1,3 +1,7 @@
+/*
+This script is used to implement VR interaction(set the light strength to a low value using the controller button).
+*/
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

@@ -1,3 +1,8 @@
+/*
+This script is used to implement VR interaction(switch to DPM or CM using the controller buttons).
+*/
+
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

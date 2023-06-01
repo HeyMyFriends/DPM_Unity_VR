@@ -1,4 +1,9 @@
-﻿using System;
+﻿/*
+This script is the other version of the LightSource script.
+*/
+
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Profiling;
